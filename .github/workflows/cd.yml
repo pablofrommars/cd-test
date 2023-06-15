@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+     - name: Say hello
+       run: echo 'Hello'
      - name: Check Tag
        id: check-tag
        run: echo ${{ github.event.ref }}
