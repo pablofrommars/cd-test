@@ -1,7 +1,6 @@
 on:
   push:
-    tags:
-    - 'release/*'
+    tags: ['release/*']
     
 jobs:
   build:
