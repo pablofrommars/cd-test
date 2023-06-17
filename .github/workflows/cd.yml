@@ -9,6 +9,8 @@ on:
       - release/prod/minor
       - release/prod/patch
       - release/prod/build
+
+permissions: write-all
     
 jobs:
   build:
