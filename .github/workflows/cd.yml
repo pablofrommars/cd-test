@@ -39,7 +39,7 @@ jobs:
 
 # if version not null!
 #  sed -i ''  "s/^version: .*$/version: 1.0.0+3/" ../../../pubspec.yaml
-# remove action tag!!!!!
+# remove action tag!!!!! git push origin --delete release/stage/major
 # tag v{new version}
 
 # https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
