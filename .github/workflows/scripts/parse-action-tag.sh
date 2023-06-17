@@ -15,9 +15,9 @@ fi
 tag_pattern="^refs/tags/release/(stage|prod)/(major|minor|patch|build)$"
 
 if [[ $tag =~ $tag_pattern ]]; then
-	tag=${BASH_REMATCH[0]}
 	action=${BASH_REMATCH[2]}
 	target=${BASH_REMATCH[1]}
+	tag="release/${target}/${action}"
 
 	echo "Bump ${action} for ${target} configured on ${branch}" >> $GITHUB_STEP_SUMMARY
 
