@@ -2,7 +2,7 @@
 base_ref=$1
 tag=$2
 
-base_ref_pattern="^refs/heads/(.0)$"
+base_ref_pattern="^refs/heads/(.*)$"
 
 if [[ $base_ref =~ $base_ref_pattern ]]; then
 	branch=${BASH_REMATCH[1]}
