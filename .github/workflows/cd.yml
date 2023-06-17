@@ -21,7 +21,7 @@ jobs:
          fetch-depth: 0
      - name: 🏷 Parse action tag
        id: parse-action-tag
-       run: .github/workflows/scripts/parse-action-tag.sh ${{ github.event.ref }}
+       run: .github/workflows/scripts/parse-action-tag.sh ${{ github.event.base_ref }} ${{ github.event.ref }}
      - name: 🔎 Get version
        id: get-version
        run: .github/workflows/scripts/get-version.sh
