@@ -8,6 +8,6 @@ user_email=$4
 git -c user.name="${user_name}" -c user.email="${user_email}" \
 	tag "v${new_version}"
 
-git -d ${action_tag}
+git tag -d ${action_tag}
 
 git push origin --follow-tags --atomic
