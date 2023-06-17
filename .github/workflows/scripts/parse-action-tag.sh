@@ -2,7 +2,7 @@
 
 tag=$1
 
-pattern="^release/(stage|prod)/(major|minor|patch|build)$"
+pattern="^refs/tags/release/(stage|prod)/(major|minor|patch|build)$"
 
 if [[ $tag =~ $pattern ]]; then
 	env=${BASH_REMATCH[1]}
