@@ -8,8 +8,8 @@ if [[ $tag =~ $pattern ]]; then
 	env=${BASH_REMATCH[1]}
 	action=${BASH_REMATCH[2]}
 
-	echo "ENV=${env}"
-	echo "ACTION=${action}"
+	echo "Bump ${acion} for ${env} configured" >> $GITHUB_STEP_SUMMARY
+
 	echo "ENV=${env}" >> "$GITHUB_OUTPUT"
 	echo "ACTION=${action}" >> "$GITHUB_OUTPUT"
 else 
