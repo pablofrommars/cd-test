@@ -10,4 +10,4 @@ git -c user.name="${user_name}" -c user.email="${user_email}" \
 
 git tag -d ${action_tag}
 
-git push origin --follow-tags --atomic ${GITHUB_BASE_REF##*/}
+git push origin --follow-tags --atomic HEAD:${GITHUB_BASE_REF##*/}
