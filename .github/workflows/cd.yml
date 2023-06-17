@@ -21,7 +21,7 @@ jobs:
          fetch-depth: 0
      - name: 🏷 Parse action tag
        id: parse-action-tag
-       run: .github/workflows/scripts/parse-action-tag.sh ${{ github.event.base_ref }} ${{ github.event.ref }}
+       run: .github/workflows/scripts/parse-action-tag.sh ${{ github.event.ref }}
      - name: 🔎 Get version
        id: get-version
        run: .github/workflows/scripts/get-version.sh
@@ -31,4 +31,4 @@ jobs:
      - name: ✍️ Update pubsepc version
        run: .github/workflows/scripts/update-pubspec.sh ${{ steps.bump-version.outputs.VERSION }} ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
      - name: ⬆️ Update repo
-       run: .github/workflows/scripts/update-repo.sh ${{ steps.parse-action-tag.outputs.BRANCH }} ${{ steps.parse-action-tag.outputs.TAG }} ${{ steps.bump-version.outputs.VERSION }} ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
+       run: .github/workflows/scripts/update-repo.sh ${{ steps.parse-action-tag.outputs.TAG }} ${{ steps.bump-version.outputs.VERSION }} ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
