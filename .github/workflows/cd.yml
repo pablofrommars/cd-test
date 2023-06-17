@@ -1,14 +1,36 @@
 on:
   push:
-    tags: ['release/*']
+    tags:
+      - release/stage/major
+      - release/stage/minor
+      - release/stage/patch
+      - release/stage/build
+      - release/prod/major
+      - release/prod/minor
+      - release/prod/patch
+      - release/prod/build
     
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Say hello
-       run: echo 'Hello'
-     - name: Check Tag
-       id: check-tag
-       run: echo ${{ github.event.ref }}
+     - name: ⬇️ Checkout repo+tags
+       uses: actions/checkout@v3
+       with:
+         fetch-depth: 0
+     - name: 🏷 Parse action tag
+       id: parse-action-tag
+       run: .github/workflows/scripts/parse-action-tag.sh ${{ github.event.ref }}
+     - name: 🔎 Get version
+       id: get-version
+       run: .github/workflows/scripts/get-version.sh
+     - name: ⏩ Bump version
+       id: bump-version
+       run: .github/workflows/scripts/bump-version.sh ${{ steps.parse-action-tag.outputs.ACTION }} ${{ steps.get-version.outputs.VERSION }}
+     - name: report
+       run: echo "${{ steps.get-version.outputs.VERSION }} -> ${{ steps.bump-version.outputs.VERSION }}"
+       #run: echo 'by ${{ github.event.pusher.name }} (${{ github.event.pusher.email }})'
+
+
+#  sed -i ''  "s/version: 1.0.0+2/version: 1.0.0+3/" ../../../pubspec.yaml

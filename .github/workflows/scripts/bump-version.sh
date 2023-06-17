@@ -14,16 +14,16 @@ if [[ $version =~ $pattern ]]; then
 
   case $action in
 	major)
-		echo "$(($((major)) + 1)).0.0+$(($((build)) + 1))"
+		bump="$(($((major)) + 1)).0.0+$(($((build)) + 1))"
 		;;
 	minor)
-		echo "${major}.$(($((minor)) + 1)).0+$(($((build)) + 1))"
+		bump="${major}.$(($((minor)) + 1)).0+$(($((build)) + 1))"
 		;;
 	patch)
-		echo "${major}.${minor}.$(($((path)) + 1))+$(($((build)) + 1))"
+		bump="${major}.${minor}.$(($((path)) + 1))+$(($((build)) + 1))"
 		;;
 	build)
-		echo "${major}.${minor}.${patch}+$(($((build)) + 1))"
+		bump="${major}.${minor}.${patch}+$(($((build)) + 1))"
 		;;
 	*)
      	exit 1
@@ -31,5 +31,7 @@ if [[ $version =~ $pattern ]]; then
 	esac
 
 else
-	echo "1.0.0+1"
+	bump="1.0.0+1"
 fi
+
+echo "VERSION=${bump}" >> "$GITHUB_OUTPUT"
