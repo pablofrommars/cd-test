@@ -28,9 +28,19 @@ jobs:
      - name: ⏩ Bump version
        id: bump-version
        run: .github/workflows/scripts/bump-version.sh ${{ steps.parse-action-tag.outputs.ACTION }} ${{ steps.get-version.outputs.VERSION }}
+     - name: Update pubsepc version
+       run: .github/workflows/scripts/update-pubspec.sh ${{ steps.bump-version.outputs.VERSION }}
+     - name: check pubspec
+       run: cat pubspec.yaml
      - name: report
        run: echo "${{ steps.get-version.outputs.VERSION }} -> ${{ steps.bump-version.outputs.VERSION }}"
        #run: echo 'by ${{ github.event.pusher.name }} (${{ github.event.pusher.email }})'
 
 
-#  sed -i ''  "s/version: 1.0.0+2/version: 1.0.0+3/" ../../../pubspec.yaml
+# if version not null!
+#  sed -i ''  "s/^version: .*$/version: 1.0.0+3/" ../../../pubspec.yaml
+# remove action tag!!!!!
+# tag v{new version}
+
+# https://github.com/stefanzweifel/git-auto-commit-action/blob/master/entrypoint.sh
+# git push
