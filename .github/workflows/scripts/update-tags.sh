@@ -1,6 +1,5 @@
 #! /bin/bash
 
-
 action_tag=$1
 new_version="v$2"
 user_name=$3
