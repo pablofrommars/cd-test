@@ -19,7 +19,7 @@ if [[ $tag =~ $tag_pattern ]]; then
 	action=${BASH_REMATCH[2]}
 	target=${BASH_REMATCH[1]}
 
-	echo "Bump ${action} for `${target}` configured on `${branch}`" >> $GITHUB_STEP_SUMMARY
+	echo "Bump ${action} for ${target} configured on ${branch}" >> $GITHUB_STEP_SUMMARY
 
 	echo "TAG=${tag}" >> "$GITHUB_OUTPUT"
 	echo "ACTION=${action}" >> "$GITHUB_OUTPUT"
