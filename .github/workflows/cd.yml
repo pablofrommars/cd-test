@@ -29,7 +29,9 @@ jobs:
        id: bump-version
        run: .github/workflows/scripts/bump-version.sh ${{ steps.parse-action-tag.outputs.ACTION }} ${{ steps.get-version.outputs.VERSION }}
      - name: ✍️ Update pubsepc version
-       run: .github/workflows/scripts/update-pubspec.sh ${{ steps.bump-version.outputs.VERSION }}
+       run: .github/workflows/scripts/update-pubspec.sh \
+         ${{ steps.bump-version.outputs.VERSION }} \
+         ${{ github.event.pusher.name }} (${{ github.event.pusher.email }})
      - name: ✍️ Update repo
        run: .github/workflows/scripts/update-repo.sh \
         ${{ steps.parse-action-tag.outputs.TAG }} \
