@@ -34,4 +34,5 @@ else
 	bump="1.0.0+1"
 fi
 
+echo "VERSION=${bump}"
 echo "VERSION=${bump}" >> "$GITHUB_OUTPUT"

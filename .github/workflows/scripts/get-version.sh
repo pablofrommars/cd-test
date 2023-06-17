@@ -2,11 +2,14 @@
 
 ref=$(git for-each-ref --sort=-creatordate --count 1 --format="%(refname:short)" "refs/tags/v*")
 
-echo "Ref ${ref} retrieved"
+pattern="^v(.*)$"
 
-[[ $ref =~ "^v(.*)$" ]]
-version=${BASH_REMATCH[1]}
+if [[ $ref =~ $pattern ]]; then
+	version=${BASH_REMATCH[1]}
 
-echo "Version ${version} retrieved"
-echo "Version ${version} retrieved" >> $GITHUB_STEP_SUMMARY
-echo "VERSION=${version}" >> "$GITHUB_OUTPUT"
+	echo "Version ${version} retrieved"
+	echo "Version ${version} retrieved" >> $GITHUB_STEP_SUMMARY
+	echo "VERSION=${version}" >> "$GITHUB_OUTPUT"
+else
+	exit 1
+fi
