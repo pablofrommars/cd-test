@@ -2,6 +2,8 @@
 
 ref=$(git for-each-ref --sort=-creatordate --count 1 --format="%(refname:short)" "refs/tags/v*")
 
+echo "Ref ${ref} retrieved"
+
 [[ $ref =~ "^v(.*)$" ]]
 version=${BASH_REMATCH[1]}
 
