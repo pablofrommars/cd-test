@@ -7,7 +7,7 @@ base_ref_pattern="^refs/heads/(.0)$"
 if [[ $base_ref =~ $base_ref_pattern ]]; then
 	branch=${BASH_REMATCH[1]}
 
-	echo "BRANCH=${bra`ch}" >> "$GITHUB_OUTPUT"
+	echo "BRANCH=${branch}" >> "$GITHUB_OUTPUT"
 else 
 	exit 1
 fi
