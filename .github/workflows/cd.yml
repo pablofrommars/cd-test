@@ -29,8 +29,44 @@ jobs:
        run: .github/workflows/scripts/get-version.sh
      - name: ⏩ Bump version
        id: bump-version
-       run: .github/workflows/scripts/bump-version.sh ${{ steps.parse-action-tag.outputs.ACTION }} ${{ steps.get-version.outputs.VERSION }}
+       run: |
+        .github/workflows/scripts/bump-version.sh \
+          ${{ steps.parse-action-tag.outputs.ACTION }} \
+          ${{ steps.get-version.outputs.VERSION }}
      - name: ⬆️ Update pubsepc version
-       run: .github/workflows/scripts/update-pubspec.sh ${{ steps.parse-action-tag.outputs.BRANCH }} ${{ steps.bump-version.outputs.VERSION }} ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
+       run: |
+        .github/workflows/scripts/update-pubspec.sh \
+          ${{ steps.parse-action-tag.outputs.BRANCH }} \
+          ${{ steps.bump-version.outputs.VERSION }} \
+          ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
      - name: 🔁 Rollout tags
-       run: .github/workflows/scripts/update-tags.sh ${{ steps.parse-action-tag.outputs.TAG }} ${{ steps.bump-version.outputs.VERSION }} ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
+       run: |
+        .github/workflows/scripts/update-tags.sh \
+          ${{ steps.parse-action-tag.outputs.TAG }} \
+          ${{ steps.bump-version.outputs.VERSION }} \
+          ${{ github.event.pusher.name }} ${{ github.event.pusher.email }}
+
+  deploy-ios:
+    #runs-on: macos-latest
+    runs-on: ubuntu-latest
+    environment: iOS
+
+    needs: [rollout]
+
+    env:
+      SECRET_TEST: ${{ secrets.IOS_SECRET_TEST }} 
+      VAR_TEST: ${{ vars.IOS_VAR_TEST }} 
+
+    steps:
+      - name: 🍏 build
+        run: echo "🍏🚀 TODO ${SECRET_TEST} ${VAR_TEST}"
+
+  deploy-android:
+    runs-on: ubuntu-latest
+    environment: android
+
+    needs: [rollout]
+
+    steps:
+      - name: 🤖 build
+        run: echo "🤖🚀 TODO"
